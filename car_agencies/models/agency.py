@@ -11,6 +11,14 @@ class CarAgency(models.Model):
     car_ids = fields.One2many('car.reference.lines', 'car_agency', string="Cars", tracking=True)
 
     def action_view_brands(self):
+        """
+        Opens a window to view car brands associated with the current agency.
+
+        This method returns an action dictionary that opens a view to display car brands
+        (`car.brand` model) in a tree and form view. The brands shown are filtered to only
+        include those associated with the current agency. The current agency ID is also passed
+        in the context to pre-fill the agency field when creating new brands.
+        """
         return {
             'name': _('Car Brands'),
             'res_model': 'car.brand',

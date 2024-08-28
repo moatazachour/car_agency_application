@@ -9,6 +9,12 @@ class CarDamageWizard(models.TransientModel):
     damage_note = fields.Text(string="Damage Description", required=True)
 
     def action_confirm_damage(self):
+        """
+        Confirms and updates the car's state to 'damaged'.
+
+        This method updates the state of the car associated with the current record to 'damaged'
+        and sets the damage note on the car record based on the current maintenance record.
+        """
         self.car_id.write({
             'state': 'damaged',
             'note': self.damage_note,

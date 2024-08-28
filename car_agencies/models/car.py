@@ -25,6 +25,17 @@ class Car(models.Model):
 
     @api.constrains('registration_number')
     def _check_registration_number(self):
+        """
+        Ensures that the registration number meets specific criteria.
+
+        This method checks the following constraints for the `registration_number` field:
+        1. The registration number must be exactly 8 digits long and must consist only of digits.
+        2. The registration number must be unique across all records.
+
+        Raises:
+            ValidationError: If the registration number does not meet the length requirement,
+                             contains non-digit characters, or is not unique.
+        """
         for rec in self:
             if len(rec.registration_number) != 8 or not rec.registration_number.isdigit():
                 raise ValidationError("Registration number should be positive and contains exactly 8 numbers")
@@ -32,6 +43,13 @@ class Car(models.Model):
                 raise ValidationError("The registration number should be unique.")
 
     def name_get(self):
+        """
+        Generates a display name for each record in the format "Car Brand - Car Model".
+
+        This method overrides the default name_get method to create a custom display name
+        for each record. The display name is constructed by combining the name of the car brand
+        and the car model, separated by a hyphen.
+        """
         res = []
         for rec in self:
             name = f"{rec.car_brand_id.name} - {rec.car_model}"
@@ -56,6 +74,13 @@ class Car(models.Model):
         return res
 
     def write(self, vals):
+        """
+        Overrides the write method to add a car to the maintenance model if its state is updated to 'damaged'.
+
+        After updating an existing car record, this method checks if the car's state has been changed to 'damaged'.
+        If so, it creates a corresponding maintenance record in the `car.maintenance` model,
+        including the car ID and any damage note.
+        """
         res = super(Car, self).write(vals)
         if 'state' in vals and vals['state'] == 'damaged':
             self.env['car.maintenance'].create({
@@ -65,6 +90,14 @@ class Car(models.Model):
         return res
 
     def action_set_damaged(self):
+        """
+        Opens a wizard form to mark the car as damaged.
+
+        This method triggers the display of a form view for the `car.damage.wizard` model,
+        allowing the user to mark the car as damaged. The form is presented as a modal window,
+        and the current car's ID is passed as the default value for the `car_id` field in the wizard.
+        """
+
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
