@@ -9,7 +9,6 @@ class CarAgency(models.Model):
     name = fields.Char(required=True)
     responsible_id = fields.Many2one('res.partner', string="Responsible", required=True, tracking=True)
     car_ids = fields.One2many('car.reference.lines', 'car_agency', string="Cars", tracking=True)
-    # brand_ids = fields.One2many('car.brand', 'agency_id', string="Supported Brands")
 
     def action_view_brands(self):
         return {
@@ -31,11 +30,3 @@ class CarReferenceLines(models.Model):
     car_number = fields.Char(related="car_id.registration_number")
     car_agency = fields.Many2one("car.agency", string="Car Agency")
 
-    # @api.onchange('car_agency')
-    # def _onchange_car_agency(self):
-    #     if self.car_agency:
-    #         brand_ids = self.car_agency.brand_ids.mapped('id')
-    #         return {'domain': {'car_id': [('car_brand_id', 'in', brand_ids)]}}
-    #     else:
-    #         # If no agency is selected, show no cars
-    #         return {'domain': {'car_id': []}}
