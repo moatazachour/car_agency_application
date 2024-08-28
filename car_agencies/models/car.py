@@ -40,6 +40,13 @@ class Car(models.Model):
 
     @api.model
     def create(self, vals):
+        """
+        Overrides the create method to automatically add a car to the maintenance model if its state is 'damaged'.
+
+        After creating a new car record, this method checks if the car's state is 'damaged'.
+        If so, it creates a corresponding maintenance record in the `car.maintenance` model,
+        including the car ID and any damage note.
+        """
         res = super(Car, self).create(vals)
         if res.state == 'damaged':
             self.env['car.maintenance'].create({
