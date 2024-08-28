@@ -19,6 +19,9 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="action_set_damaged" string="Damaged" type="object"
+                                            class="oe_highlight"
+                                            attrs="{'invisible': [('state', '=', 'damaged')]}"/>
                     <field name= "state" widget="statusbar" nolabel="1" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
@@ -38,9 +41,6 @@
                                     <field name="customer_id"/>
 <!--                                    <field name="state" attrs="{'invisible': [('state', '=', 'damaged')]}"/>-->
                                     <field name="note" attrs="{'invisible': [('state', '!=', 'damaged')]}"/>
-                                    <button name="action_set_damaged" string="Damaged" type="object"
-                                            class="oe_highlight"
-                                            attrs="{'invisible': [('state', '=', 'damaged')]}"/>
                                 </group>
                             </group>
                         </div>
