@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_car_brand,access_car_brand,car_agencies.model_car_brand,base.group_user,1,1,1,1
+access_car_car,access_car_car,car_agencies.model_car_car,base.group_user,1,1,1,1
+access_car_agency,access_car_agency,car_agencies.model_car_agency,base.group_user,1,1,1,1
+access_res_partner,access_res_partner,car_agencies.model_res_partner,base.group_user,1,1,1,1
+access_car_damage_wizard,access_car_damage_wizard,car_agencies.model_car_damage_wizard,base.group_user,1,1,1,1
+access_car_maintenance,access_car_maintenance,car_agencies.model_car_maintenance,base.group_user,1,1,1,1
+access_car_reference_lines,access_car_reference_lines,car_agencies.model_car_reference_lines,base.group_user,1,1,1,1

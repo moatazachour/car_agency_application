@@ -1,0 +1,92 @@
+<odoo>
+    <record id="agency_tree_view" model="ir.ui.view">
+        <field name="name">car.agency.tree</field>
+        <field name="model">car.agency</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="responsible_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="agency_form_view" model="ir.ui.view">
+        <field name="name">car.agency.form</field>
+        <field name="model">car.agency</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_view_brands"
+                                icon="fa-star" string="View Brands"/>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="responsible_id"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Cars" name="cars">
+                            <field name="car_ids">
+                                <tree editable="bottom">
+                                    <field name="car_id"/>
+                                    <field name="car_number"/>
+                                </tree>
+<!--                                <form>-->
+<!--                                    <group>-->
+<!--                                        <field name="car_number"/>-->
+<!--                                        <field name="car_id"/>-->
+<!--                                    </group>-->
+<!--                                </form>-->
+                            </field>
+                        </page>
+                    </notebook>
+<!--                    <group>-->
+<!--                        <field name="car_select_id" options="{'no_open': True}"-->
+<!--                                domain=""/>-->
+<!--                    </group>-->
+<!--                    <group>-->
+<!--                        <div style="width: 200px;">-->
+<!--                            <button name="action_add_existing_car" type="object" string="Add Car"-->
+<!--                                    class="btn-primary"/>-->
+<!--                        </div>-->
+<!--                    </group>-->
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="agency_search_view" model="ir.ui.view">
+        <field name="name">car.agency.search</field>
+        <field name="model">car.agency</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="0" string="Group By...">
+                    <filter string="Responsible" name="group_by_responsible_id"
+                            context="{'group_by': 'responsible_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_view_brands" model="ir.actions.act_window">
+        <field name="name">Car Brands</field>
+        <field name="res_model">car.brand</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('agency_id', '=', active_id)]</field>
+        <field name="context">{'default_agency_id': active_id}</field>
+    </record>
+
+    <record id="action_agency" model="ir.actions.act_window">
+        <field name="name">Agencies</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">car.agency</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

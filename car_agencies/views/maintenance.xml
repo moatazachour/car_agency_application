@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_maintenance_tree" model="ir.ui.view">
+        <field name="name">car.maintenance.tree</field>
+        <field name="model">car.maintenance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="car_id"/>
+                <field name="damage_note"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_maintenance_form" model="ir.ui.view">
+        <field name="name">car.maintenance.form</field>
+        <field name="model">car.maintenance</field>
+        <field name="arch" type="xml">
+            <form string="Car Maintenance">
+                <sheet>
+                    <group>
+                        <field name="car_id"/>
+                        <field name="damage_note"/>
+                    </group>
+                    <group>
+                        <button string="Fixed" type="object" name="action_fix_car" class="oe_highlight"/>
+<!--                        <button string="Cancel" class="oe_link" special="cancel"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_maintenance" model="ir.actions.act_window">
+        <field name="name">Car Maintenance</field>
+        <field name="res_model">car.maintenance</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

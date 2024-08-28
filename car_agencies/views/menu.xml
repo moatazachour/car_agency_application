@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+            id="menu_car_agency_root"
+            name="Car Agency"
+            sequence="10"/>
+
+    <menuitem
+            id="menu_car"
+            name="Cars"
+            parent="menu_car_agency_root"
+            action="action_car"
+            sequence="10"/>
+
+    <menuitem
+            id="menu_agency"
+            name="Agencies"
+            parent="menu_car_agency_root"
+            action="action_agency"
+            sequence="10"/>
+
+    <menuitem
+            id="menu_brand"
+            name="Brands"
+            parent="menu_car_agency_root"
+            action="action_car_brand"
+            sequence="10"/>
+
+
+    <menuitem
+            id="menu_car_maintenance"
+            name="Car Maintenance"
+            parent="menu_car_agency_root"
+            action="action_maintenance"
+            sequence="10"/>
+
+
+<!--    <menuitem-->
+<!--            id="menu_customer"-->
+<!--            name="Customers"-->
+<!--            parent="menu_car_agency_root"-->
+<!--            action="action_customer"-->
+<!--            sequence="10"/>-->
+
+
+</odoo>
